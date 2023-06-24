@@ -15,7 +15,8 @@ class DQN(nn.Module):
         # self.vgg_model = models.vgg11(pretrained=False)
 
     def forward(self, x):
-        x = x.view(x.size()[0], -1)
+        # x = x.view(x.size()[0], -1)
+        x = x.view(-1)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         return self.fc3(x)
