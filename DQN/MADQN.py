@@ -46,6 +46,7 @@ class MADQN:
 
         start_time = time.time()
         for ep in range(n_episodes):
+            print(f'epsiode = {ep}')
 
             # initialize new episode
             ep_step = 0
@@ -62,7 +63,7 @@ class MADQN:
                     for i, agent in enumerate(self.agents):
                         # augment observation with steps in environment
                         full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
-                        print(65, full_obs.shape, [ep_step / self.steps_per_episode])
+                        # print(65, full_obs.shape, [ep_step / self.steps_per_episode])
                         actions.append(agent.get_action(full_obs, explore=True))
 
                 # perform agent's actions and retrieve transition parameters
