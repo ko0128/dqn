@@ -221,22 +221,22 @@ class WareHouse:
     def step(self, actions):
         reward, is_legal_move_list = self.get_reward(actions)
 
-        # generate some change grid
-        for _ in range(8):
-            col = random.randint(0, self.grid_width-1)
-            row = random.randint(0, self.grid_height-1)
-            if self.grid_data[row][col] != 1:
-                self.changed_grid.append((row, col))
+        # # generate some change grid
+        # for _ in range(8):
+        #     col = random.randint(0, self.grid_width-1)
+        #     row = random.randint(0, self.grid_height-1)
+        #     if self.grid_data[row][col] != 1:
+        #         self.changed_grid.append((row, col))
         
-        # update grid
-        for row, col in self.changed_grid:
-            self.grid_data[row][col] = 2
+        # # update grid
+        # for row, col in self.changed_grid:
+        #     self.grid_data[row][col] = 2
 
-        # remove something in changed_grid
-        for _ in range(random.randint(4,8)):
-            if len(self.changed_grid) > 1:
-                idx = random.randint(0, len(self.changed_grid)-1)
-                self.changed_grid.pop(idx)
+        # # remove something in changed_grid
+        # for _ in range(random.randint(4,8)):
+        #     if len(self.changed_grid) > 1:
+        #         idx = random.randint(0, len(self.changed_grid)-1)
+        #         self.changed_grid.pop(idx)
 
         
         self.move_robots(is_legal_move_list, actions)
