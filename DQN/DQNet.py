@@ -15,9 +15,9 @@ class DQN(nn.Module):
         # self.vgg_model = models.vgg11(pretrained=False)
 
         self.cnn = nn.Sequential(
-            nn.Conv2d(4, 16, 3),
+            nn.Conv2d(4, 16, 5),
             nn.ReLU(),
-            nn.Conv2d(16, 8, 6),
+            nn.Conv2d(16, 8, 3),
             nn.ReLU(),
         )
         self.pred = nn.Sequential(
