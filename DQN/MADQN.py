@@ -66,10 +66,10 @@ class MADQN:
                         # augment observation with steps in environment
                         # full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
                         full_obs = np.array(obs[i], dtype=np.float32)
-                        print('obs[i]:')
-                        print(obs[i][0][:,:])
-                        print('full_obs[i]:')
-                        print(full_obs)
+                        # print('obs[i]:')
+                        # print(obs[i][0][:,:])
+                        # print('full_obs[i]:')
+                        # print(full_obs)
                         # print(65, full_obs.shape, [ep_step / self.steps_per_episode])
                         actions.append(agent.get_action(full_obs, explore=True))
 
