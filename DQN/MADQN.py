@@ -26,8 +26,8 @@ class MADQN:
 
         # initialize agents
         self.agents = [DQNAgent(self.obs_dim, self.n_actions, **agent_params) for _ in range(env.n_agents)]
-        # for agent in self.agents:
-        #     agent = agent.to('cuda')
+        for agent in self.agents:
+            agent = agent.to('cuda')
         self.burnin_steps = agent_params['burnin_steps']
 
         # value decomposition network

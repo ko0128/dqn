@@ -87,14 +87,15 @@ class DQNAgent:
             # convert to pytorch tensor
             this_state = torch.tensor(state, dtype=torch.float)
             if len(this_state.shape)==3:
-                this_state = this_state.unsqueeze(0)
+                # this_state = this_state.unsqueeze(0)
+                this_state = this_state.unsqueeze(0).to('cuda')
 
             # no need for backprop during inference
             with torch.no_grad():
                 # return action that
                 this_q_vals = self.policy_net.forward(this_state)
-                print(f'this_q_vals: {this_q_vals}' )
-                print(this_q_vals[0].max(0).indices.item())
+                # print(f'this_q_vals: {this_q_vals}' )
+                # print(this_q_vals[0].max(0).indices.item())
                 return this_q_vals[0].max(0).indices.item()
                 # return this_q_vals.max(0).indices.item()
 
@@ -108,15 +109,21 @@ class DQNAgent:
         """
         # merge samples from replay buffer into one batch
         batch = Transition(*zip(*sampled_transitions))
-        batch_states = torch.stack(batch.state)
-        batch_actions = torch.cat(batch.action)
-        batch_rewards = torch.cat(batch.reward)
-        batch_next_states = torch.stack(batch.next_state)
-        batch_not_dones = ~torch.cat(batch.done) # transitions in replay buffer are already done
+        # batch_states = torch.stack(batch.state)
+        # batch_actions = torch.cat(batch.action)
+        # batch_rewards = torch.cat(batch.reward)
+        # batch_next_states = torch.stack(batch.next_state)
+        # batch_not_dones = ~torch.cat(batch.done) # transitions in replay buffer are already done
+
+        batch_states = torch.stack(batch.state).to('cuda')
+        batch_actions = torch.cat(batch.action).to('cuda')
+        batch_rewards = torch.cat(batch.reward).to('cuda')
+        batch_next_states = torch.stack(batch.next_state).to('cuda')
+        batch_not_dones = ~torch.cat(batch.done).to('cuda') # transitions in replay buffer are already done
 
         # gather current q-values by action
-        print(f'batch_states.shape: {batch_states.shape}')
-        print(f'batch_states.shape: {batch_actions.shape}')
+        # print(f'batch_states.shape: {batch_states.shape}')
+        # print(f'batch_states.shape: {batch_actions.shape}')
         current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
 
         # compute target q-values
