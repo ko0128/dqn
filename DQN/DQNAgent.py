@@ -111,6 +111,8 @@ class DQNAgent:
         batch_not_dones = ~torch.cat(batch.done) # transitions in replay buffer are already done
 
         # gather current q-values by action
+        print(f'batch_states.shape: {batch_states.shape}')
+        print(f'batch_states.shape: {batch_actions.shape}')
         current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
 
         # compute target q-values

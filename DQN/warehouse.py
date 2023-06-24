@@ -119,7 +119,11 @@ class WareHouse:
         # Add gridlines
         ax.grid(color='black', linewidth=0.5)
 
-        return fig, ax
+        self.fig, self.ax = fig, ax
+        # return fig, ax
+        del fig, ax
+        # plt.close()
+        return self.fig, self.ax
     
     def plot_path(self, ax, path, color):
         for x, y in path:
@@ -307,7 +311,7 @@ if __name__=='__main__':
         random.seed(8764)
         np.random.seed(420)
     warehouse = WareHouse(grid_data, 2)
-    for i in range (2):
+    for i in range (10):
         # print(i)
         actions = [np.random.randint(0, 4), np.random.randint(0, 4)]
         # print(actions)
