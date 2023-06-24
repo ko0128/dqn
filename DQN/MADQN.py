@@ -187,7 +187,7 @@ class MADQN:
                 for i, agent in enumerate(self.agents):
                     # augment observation with steps in environment
                     full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
-                    print(f'full_obs shape:{full_obs.shape}')
+                    # print(f'full_obs shape:{full_obs.shape}')
                     actions.append(agent.get_action(full_obs, explore=False))
 
                 obs, rewards, dones, info = self.env.step(actions)
