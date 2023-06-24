@@ -120,17 +120,19 @@ class DQNAgent:
 
         batch_states = torch.stack(batch.state).to('cuda')
         batch_actions = torch.cat(batch.action).to('cuda')
-        batch_rewards = torch.cat(batch.reward).to('cuda')
+        batch_rewards = torch.cat(batch.reward)
         batch_next_states = torch.stack(batch.next_state).to('cuda')
-        batch_not_dones = ~torch.cat(batch.done).to('cuda') # transitions in replay buffer are already done
+        batch_not_dones = ~torch.cat(batch.done) # transitions in replay buffer are already done
 
         # gather current q-values by action
         # print(f'batch_states.shape: {batch_states.shape}')
         # print(f'batch_states.shape: {batch_actions.shape}')
-        current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
+        # current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
+        current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1)).cpu()
 
         # compute target q-values
-        target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
+        # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
+        target_qvals = self.target_net.forward(batch_next_states).cpu().max(1).values.detach()
 
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
