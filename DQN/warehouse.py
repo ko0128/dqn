@@ -77,6 +77,9 @@ class WareHouse:
         # self.robots = []
         # self.robots.append(Robot((0,0), (9,9)))
         self.num_agent = num_agent
+        self.n_agents = num_agent
+        self.n_actions = 4
+        self.observation_space = 4*10*10
         self.robot = Robot([0, 0], [9, 9])
         self.robot_list = []
         self.robot_list.append(Robot([0, 0], [9, 9]))
@@ -236,7 +239,7 @@ class WareHouse:
                     neighbor_goal[agt.goal[0]][agt.goal[1]] = 1
             agt_goal = np.zeros(self.grid_data.shape)
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
-            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=-1)
+            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=0)
             print(obs[i].shape)
         # print(obs)
         # return next_state, reward, done, info

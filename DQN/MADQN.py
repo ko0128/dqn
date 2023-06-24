@@ -15,8 +15,10 @@ class MADQN:
 
         # environment
         self.env = env
-        self.obs_dim = env.observation_space[0].shape[0] + 1
-        self.n_actions = env.action_space[0].n
+        # self.obs_dim = env.observation_space[0].shape[0] + 1
+        self.obs_dim = env.observation_space
+        # self.n_actions = env.action_space[0].n
+        self.n_actions = env.n_actions
 
         # training parameters
         self.batch_size = agent_params['batch_size']
@@ -60,6 +62,7 @@ class MADQN:
                     for i, agent in enumerate(self.agents):
                         # augment observation with steps in environment
                         full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
+                        print(full_obs.shape)
                         actions.append(agent.get_action(full_obs, explore=True))
 
                 # perform agent's actions and retrieve transition parameters
@@ -140,7 +143,7 @@ class MADQN:
             if np.mean(successful_agents[-10:]) == self.env.n_agents:
                 break
 
-        self.env.close()
+        # self.env.close()
 
         print("\n--- Finished training ---")
         print(f"Total training time: {time.time()-start_time:.0f} sec. ({(time.time()-start_time)/60:.1f} min.)")
@@ -198,6 +201,6 @@ class MADQN:
                   f'Min: {np.min(game_rewards):.1f} / '
                   f'Max: {np.max(game_rewards):.1f}')
 
-            self.env.close()
+            # self.env.close()
 
         return game_rewards, successful_agents
