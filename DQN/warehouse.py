@@ -161,7 +161,7 @@ class WareHouse:
             is_legal_move = True
             action_set = [(1, 0), (-1, 0), (0, 1), (0, -1)]
             new_pos = (robot.pos[0]+action_set[actions[idx]][0], robot.pos[1]+action_set[actions[idx]][1])
-            if new_pos[0] < 0 or new_pos[0] > self.grid_height or new_pos[1] < 0 or new_pos[1] > self.grid_width:
+            if new_pos[0] < 0 or new_pos[0] > self.grid_height-1 or new_pos[1] < 0 or new_pos[1] > self.grid_width-1:
                 reward -= -2
                 is_legal_move = False
             else:
@@ -180,10 +180,10 @@ class WareHouse:
 
             reward_list.append(reward)
             is_legal_move_list.append(is_legal_move) 
-        print(len(reward_list), len(is_legal_move_list))
+        # print(len(reward_list), len(is_legal_move_list))
         return reward_list, is_legal_move_list
     def move_robots(self, is_legal_move_list, act_list):
-        print(is_legal_move_list)
+        # print(is_legal_move_list)
         for robot, is_legal_move, action in zip(self.robot_list, is_legal_move_list, act_list):
             if is_legal_move:
                 act_set  = [(1, 0), (-1, 0), (0, 1), (0, -1)]
