@@ -21,7 +21,7 @@ class DQN(nn.Module):
             nn.ReLU(),
         )
         self.pred = nn.Sequential(
-            nn.Linear(8*3*3, 16),
+            nn.Linear(8*4*4, 16),
             nn.ReLU(),
             nn.Linear(16, 4)
         )
