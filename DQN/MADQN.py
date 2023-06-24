@@ -62,7 +62,7 @@ class MADQN:
                     for i, agent in enumerate(self.agents):
                         # augment observation with steps in environment
                         full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
-                        print(full_obs.shape)
+                        print(65, full_obs.shape, [ep_step / self.steps_per_episode])
                         actions.append(agent.get_action(full_obs, explore=True))
 
                 # perform agent's actions and retrieve transition parameters
