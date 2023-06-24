@@ -324,7 +324,9 @@ if __name__=='__main__':
     if FIX_RANDOM_SEED:
         random.seed(8764)
         np.random.seed(420)
+    
     warehouse = WareHouse(grid_data, 2)
+    warehouse.reset()
     for i in range (10):
         # print(i)
         actions = [np.random.randint(0, 4), np.random.randint(0, 4)]
