@@ -99,7 +99,7 @@ class DQNAgent:
                 this_q_vals = self.policy_net.forward(this_state)
                 # print(f'this_q_vals: {this_q_vals}' )
                 # print(this_q_vals[0].max(0).indices.item())
-                return this_q_vals[0].max(0).indices.item()
+                return this_q_vals[0].cpu().max(0).indices.item()
                 # return this_q_vals.max(0).indices.item()
 
 

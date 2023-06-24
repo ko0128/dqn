@@ -1,6 +1,8 @@
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+import torch
+import random
 
 from DQN.MADQN import MADQN
 from DQN.warehouse import WareHouse
@@ -28,6 +30,12 @@ if __name__ == '__main__':
     # make environment
     # env = gym.make(ENV_NAME)
     env = WareHouse(grid_data, 2)
+
+    FIX_RANDOM_SEED =True
+    if FIX_RANDOM_SEED:
+        np.random.seed(1)
+        torch.manual_seed(0)
+        random.seed(0)
 
     # choose model
     if MODEL == 'DQN':
