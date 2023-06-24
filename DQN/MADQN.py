@@ -68,7 +68,6 @@ class MADQN:
 
                 # perform agent's actions and retrieve transition parameters
                 next_obs, rewards, dones, info = self.env.step(actions)
-                # assert next_obs.shape ==
                 ep_step += 1
 
                 # add agent rewards of transition
@@ -88,7 +87,9 @@ class MADQN:
                     # augment observations with steps in environment
                     agent_obs = np.array(obs[a] + [ep_step / self.steps_per_episode], dtype=np.float32)
                     agent_next_obs = np.array(next_obs[a] + [ep_step / self.steps_per_episode], dtype=np.float32)
-
+                    assert agent_obs.shape ==  (10, 10, 4)
+                    assert agent_next_obs.shape ==  (10, 10, 4)
+                        
                     # let agent take step and add
                     qvals, target = agent.step(agent_obs, actions[a], rewards[a], agent_next_obs, dones[a])
 
