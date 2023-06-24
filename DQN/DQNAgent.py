@@ -20,8 +20,11 @@ class DQNAgent:
         self.memory = ReplayBuffer(capacity=self.replay_buffer_capacity)
 
         # policy and target approximation neural nets
-        self.policy_net = DQN(obs_dim, act_dim, self.hidden_layer_dim)
-        self.target_net = DQN(obs_dim, act_dim, self.hidden_layer_dim)
+        # self.policy_net = DQN(obs_dim, act_dim, self.hidden_layer_dim)
+        # self.target_net = DQN(obs_dim, act_dim, self.hidden_layer_dim)
+
+        self.target_net = DQN(obs_dim, act_dim, self.hidden_layer_dim).to('cuda')
+        self.policy_net = DQN(obs_dim, act_dim, self.hidden_layer_dim).to('cuda')
 
         self.t = 0
 
