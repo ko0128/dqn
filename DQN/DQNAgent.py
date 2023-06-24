@@ -86,6 +86,8 @@ class DQNAgent:
         else:
             # convert to pytorch tensor
             this_state = torch.tensor(state, dtype=torch.float)
+            if len(this_state.shape)==3:
+                this_state = this_state.unsqueeze(0)
 
             # no need for backprop during inference
             with torch.no_grad():
