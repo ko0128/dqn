@@ -154,7 +154,20 @@ class WareHouse:
     def reset(self):
         for x, y in self.changed_grid:
             self.grid_data[x][y] = 0
-        return self.grid_data
+        obs = np.zeros((self.num_agent, self.grid_height, self.grid_width ,4))
+        for i in range(self.num_agent):
+            obstacle = self.grid_data
+            agt_pos = np.zeros(self.grid_data.shape)
+            for agt in self.robot_list:
+                agt_pos[agt.pos[0]][agt.pos[1]] = 1
+            neighbor_goal = np.zeros(self.grid_data.shape)
+            for idx, agt in enumerate(self.robot_list):
+                if idx != i:
+                    neighbor_goal[agt.goal[0]][agt.goal[1]] = 1
+            agt_goal = np.zeros(self.grid_data.shape)
+            agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
+            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=-1)   
+        return obs
     
     def get_reward(self, actions):
         reward_list = []
