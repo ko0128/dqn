@@ -26,6 +26,8 @@ class MADQN:
 
         # initialize agents
         self.agents = [DQNAgent(self.obs_dim, self.n_actions, **agent_params) for _ in range(env.n_agents)]
+        # for agent in self.agents:
+        #     agent = agent.to('cuda')
         self.burnin_steps = agent_params['burnin_steps']
 
         # value decomposition network
@@ -87,9 +89,9 @@ class MADQN:
                     # augment observations with steps in environment
                     agent_obs = np.array(obs[a] + [ep_step / self.steps_per_episode], dtype=np.float32)
                     agent_next_obs = np.array(next_obs[a] + [ep_step / self.steps_per_episode], dtype=np.float32)
-                    print(obs[a].shape)
-                    print(agent_obs.shape)
-                    print(agent_next_obs.shape)
+                    # print(obs[a].shape)
+                    # print(agent_obs.shape)
+                    # print(agent_next_obs.shape)
                     assert agent_obs.shape ==  (10, 10, 4)
                     assert agent_next_obs.shape ==  (10, 10, 4)
                         
