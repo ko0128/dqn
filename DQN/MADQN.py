@@ -78,7 +78,7 @@ class MADQN:
                 rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
                 if render and not ep % log_period:
-                    self.env.render()
+                    # self.env.render()
                     time.sleep(0.05)
 
                 #
