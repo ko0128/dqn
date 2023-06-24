@@ -86,16 +86,17 @@ class DQNAgent:
         else:
             # convert to pytorch tensor
             this_state = torch.tensor(state, dtype=torch.float)
-            # if len(this_state.shape)==3:
-            #     this_state = this_state.unsqueeze(0)
+            if len(this_state.shape)==3:
+                this_state = this_state.unsqueeze(0)
 
             # no need for backprop during inference
             with torch.no_grad():
                 # return action that
                 this_q_vals = self.policy_net.forward(this_state)
                 print(f'this_q_vals: {this_q_vals}' )
-                print(this_q_vals.max(0).indices.item())
-                return this_q_vals.max(0).indices.item()
+                print(this_q_vals[0].max(0).indices.item())
+                return this_q_vals[0].max(0).indices.item()
+                # return this_q_vals.max(0).indices.item()
 
 
 
