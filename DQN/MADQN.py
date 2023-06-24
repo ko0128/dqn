@@ -68,7 +68,7 @@ class MADQN:
                         print('obs[i]:')
                         print(obs[i][0][:,:])
                         print('full_obs[i]:')
-                        print(full_obs[i][0][:,:])
+                        print(full_obs[i])
                         # print(65, full_obs.shape, [ep_step / self.steps_per_episode])
                         actions.append(agent.get_action(full_obs, explore=True))
 
