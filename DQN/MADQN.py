@@ -65,6 +65,10 @@ class MADQN:
                     for i, agent in enumerate(self.agents):
                         # augment observation with steps in environment
                         full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
+                        print('obs[i]:')
+                        print(obs[i][0][:,:])
+                        print('full_obs[i]:')
+                        print(full_obs[i][0][:,:])
                         # print(65, full_obs.shape, [ep_step / self.steps_per_episode])
                         actions.append(agent.get_action(full_obs, explore=True))
 
@@ -92,8 +96,8 @@ class MADQN:
                     # print(obs[a].shape)
                     # print(agent_obs.shape)
                     # print(agent_next_obs.shape)
-                    assert agent_obs.shape ==  (10, 10, 4)
-                    assert agent_next_obs.shape ==  (10, 10, 4)
+                    assert agent_obs.shape ==  (4, 10, 10)
+                    assert agent_next_obs.shape ==  (4, 10, 10)
                         
                     # let agent take step and add
                     qvals, target = agent.step(agent_obs, actions[a], rewards[a], agent_next_obs, dones[a])
