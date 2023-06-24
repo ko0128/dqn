@@ -68,6 +68,7 @@ class MADQN:
 
                 # perform agent's actions and retrieve transition parameters
                 next_obs, rewards, dones, info = self.env.step(actions)
+                # assert next_obs.shape ==
                 ep_step += 1
 
                 # add agent rewards of transition

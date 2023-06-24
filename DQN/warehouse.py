@@ -245,6 +245,7 @@ class WareHouse:
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
             obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=-1)
             # print(obs[i].shape)
+            assert obs[i].shape == (10, 10, 4)
         # print(obs)
         # return next_state, reward, done, info
         return obs, reward, dones, 'Hello'
