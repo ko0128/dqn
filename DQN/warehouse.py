@@ -154,7 +154,7 @@ class WareHouse:
     def reset(self):
         for x, y in self.changed_grid:
             self.grid_data[x][y] = 0
-        obs = np.zeros((self.num_agent, self.grid_height, self.grid_width ,4))
+        obs = np.zeros((self.num_agent, 4, self.grid_height, self.grid_width))
         for i in range(self.num_agent):
             obstacle = self.grid_data
             agt_pos = np.zeros(self.grid_data.shape)
@@ -244,7 +244,7 @@ class WareHouse:
 
         dones = self.are_finished()
 
-        obs = np.zeros((self.num_agent, self.grid_height, self.grid_width ,4))
+        obs = np.zeros((self.num_agent, 4, self.grid_height, self.grid_width))
         for i in range(self.num_agent):
             obstacle = self.grid_data
             agt_pos = np.zeros(self.grid_data.shape)
