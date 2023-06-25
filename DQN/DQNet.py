@@ -17,11 +17,11 @@ class DQN(nn.Module):
         self.cnn = nn.Sequential(
             nn.Conv2d(4, 16, 3),
             nn.ReLU(),
-            nn.Conv2d(16, 8, 3),
+            nn.Conv2d(16, 8, 5),
             nn.ReLU(),
         )
         self.pred = nn.Sequential(
-            nn.Linear(8*6*6, 32),
+            nn.Linear(8*4*4, 32),
             nn.ReLU(),
             nn.Linear(32, 4)
         )
