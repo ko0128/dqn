@@ -84,7 +84,8 @@ class MADQN:
 
                 if render and not ep % log_period:
                     # self.env.render()
-                    time.sleep(0.05)
+                    # time.sleep(0.05)
+                    pass
 
                 #
                 qvals_sum = torch.zeros((self.batch_size, 1))
@@ -207,7 +208,7 @@ class MADQN:
 
             game_rewards.append(cum_rewards)
             successful_agents.append(target_reached)
-            time.sleep(0.2)
+            # time.sleep(0.2)
 
         if done_training:
             print('\n=== Test performance ===')
