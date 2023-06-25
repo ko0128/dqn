@@ -100,12 +100,12 @@ class WareHouse:
                 else:
                     ax.add_patch(plt.Rectangle((j, i), 1, 1, facecolor='white', edgecolor='black', alpha = 1))
 
-        for control in self.control_nodes:
-            ax.scatter(control.x, control.y, color = control.color, marker='*', zorder = 10)
-            # print(control.color)
-            # print(control.x, control.y)
-            for compute in control.compute_nodes:
-                ax.scatter(compute.x, compute.y, color = control.color, marker=',', zorder = 10)
+        # for control in self.control_nodes:
+        #     ax.scatter(control.x, control.y, color = control.color, marker='*', zorder = 10)
+        #     # print(control.color)
+        #     # print(control.x, control.y)
+        #     for compute in control.compute_nodes:
+        #         ax.scatter(compute.x, compute.y, color = control.color, marker=',', zorder = 10)
 
 
         # Set the aspect ratio to 'equal' for square grid cells
@@ -327,11 +327,20 @@ if __name__=='__main__':
     
     warehouse = WareHouse(grid_data, 2)
     warehouse.reset()
-    for i in range (10):
+    for i in range (8):
         # print(i)
-        actions = [np.random.randint(0, 4), np.random.randint(0, 4)]
+        actions = [0, np.random.randint(0, 4)]
         # print(actions)
         warehouse.step(actions)
         fig, ax = warehouse.render()
         plt.draw()
         plt.pause(0.5)
+
+    for i in range (8):
+        # print(i)
+        actions = [2, np.random.randint(0, 4)]
+        # print(actions)
+        warehouse.step(actions)
+        fig, ax = warehouse.render()
+        plt.draw()
+        plt.pause(0.1)
