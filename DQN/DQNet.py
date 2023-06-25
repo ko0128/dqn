@@ -15,15 +15,15 @@ class DQN(nn.Module):
         # self.vgg_model = models.vgg11(pretrained=False)
 
         self.cnn = nn.Sequential(
-            nn.Conv2d(4, 16, 5),
+            nn.Conv2d(4, 16, 3),
             nn.ReLU(),
             nn.Conv2d(16, 8, 3),
             nn.ReLU(),
         )
         self.pred = nn.Sequential(
-            nn.Linear(8*4*4, 16),
+            nn.Linear(8*6*6, 32),
             nn.ReLU(),
-            nn.Linear(16, 4)
+            nn.Linear(32, 4)
         )
 
     def forward(self, x):
