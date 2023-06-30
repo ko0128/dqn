@@ -48,7 +48,7 @@ class MADQN:
 
         start_time = time.time()
         for ep in range(n_episodes):
-            print(f'epsiode = {ep}')
+            print(f'epsiode = {ep}', end='')
 
             # initialize new episode
             ep_step = 0
@@ -56,9 +56,9 @@ class MADQN:
             obs = self.env.reset()
             dones = [False for _ in self.agents]
 
-
+            cnt = 0 
             while not all(dones):
-
+                cnt += 1
                 # select agent actions from observations
                 actions = []
                 with torch.no_grad():
@@ -129,6 +129,8 @@ class MADQN:
                 # clip gradients
                 self.vd_net.clip_gradients(vdn_params['clip_val'])
                 self.vd_optimizer.step()
+
+            print(cnt)
 
             train_rewards.append(current_ep_rewards)
 
