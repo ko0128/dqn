@@ -82,7 +82,7 @@ class WareHouse:
         self.observation_space = 4*10*10
         self.robot = Robot([0, 0], [9, 9])
         self.robot_list = []
-        self.robot_list.append(Robot([0, 0], [9, 9]))
+        self.robot_list.append(Robot([0, 0], [0, 5]))
         self.robot_list.append(Robot([4, 5], [3, 9]))
         assert self.num_agent == len(self.robot_list)
         fig, ax = plt.subplots()
