@@ -187,9 +187,9 @@ class WareHouse:
                     is_legal_move = False
                 
                 if self.man_dis(new_pos, robot.goal) < self.man_dis(robot.pos, robot.goal):
-                    reward += 0.2
+                    reward += 2
                 else:
-                    reward -= 0.2
+                    reward -= 2
 
                 if new_pos[0] == robot.goal[0] and new_pos[1] == robot.goal[1]:
                     reward = 100
@@ -327,7 +327,7 @@ if __name__=='__main__':
     
     warehouse = WareHouse(grid_data, 2)
     warehouse.reset()
-    for i in range (8):
+    for i in range (2):
         # print(i)
         actions = [0, np.random.randint(0, 4)]
         # print(actions)
@@ -336,11 +336,11 @@ if __name__=='__main__':
         plt.draw()
         plt.pause(0.5)
 
-    for i in range (8):
-        # print(i)
-        actions = [2, np.random.randint(0, 4)]
-        # print(actions)
-        warehouse.step(actions)
-        fig, ax = warehouse.render()
-        plt.draw()
-        plt.pause(0.1)
+    # for i in range (8):
+    #     # print(i)
+    #     actions = [2, np.random.randint(0, 4)]
+    #     # print(actions)
+    #     warehouse.step(actions)
+    #     fig, ax = warehouse.render()
+    #     plt.draw()
+    #     plt.pause(0.1)
