@@ -50,7 +50,7 @@ class MADQN:
         start_time = time.time()
         print(n_episodes)
         for ep in range(n_episodes):
-            print(f'epsiode = {ep}', end=' ')
+            print(f'epsiode = {ep}')
 
             # initialize new episode
             ep_step = 0
