@@ -31,7 +31,7 @@ if __name__ == '__main__':
     # env = gym.make(ENV_NAME)
     env = WareHouse(grid_data, 2)
 
-    FIX_RANDOM_SEED =True
+    FIX_RANDOM_SEED =False
     if FIX_RANDOM_SEED:
         torch.manual_seed(420)
         if torch.cuda.is_available():
