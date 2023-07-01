@@ -31,11 +31,15 @@ if __name__ == '__main__':
     # env = gym.make(ENV_NAME)
     env = WareHouse(grid_data, 2)
 
-    FIX_RANDOM_SEED =False
+    FIX_RANDOM_SEED =True
     if FIX_RANDOM_SEED:
-        np.random.seed(1)
-        torch.manual_seed(0)
-        random.seed(0)
+        torch.manual_seed(420)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(420)
+            torch.cuda.manual_seed_all(420)  
+        np.random.seed(420)  
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
 
     # choose model
     if MODEL == 'DQN':
