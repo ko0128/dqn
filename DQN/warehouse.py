@@ -15,6 +15,7 @@ class Robot:
     
     def update_start_goal(self, start, goal):
         # x, y = goal[0], goal[1]
+        self.pos = start
         self.start = start
         self.goal = goal
 
@@ -80,11 +81,13 @@ class WareHouse:
         self.n_agents = num_agent
         self.n_actions = 4
         self.observation_space = 4*10*10
-        self.robot = Robot([0, 0], [9, 9])
+        # self.robot = Robot([0, 0], [9, 9])
         self.robot_list = []
         self.robot_list.append(Robot([0, 0], [0, 5]))
         self.robot_list.append(Robot([4, 5], [3, 9]))
-        assert self.num_agent == len(self.robot_list)
+        assert self.num_agent == len(self.robot_list) 
+        self.legal_start_end = [[x, y] for x in range(self.grid_height) for y in range(self.grid_width) if self.grid_data[x][y]==0]
+
         fig, ax = plt.subplots()
         self.fig = fig
         self.ax = ax
@@ -148,12 +151,20 @@ class WareHouse:
             control_nodes.append(Control_node(x, y, num_compute))
         return control_nodes
 
-    def man_dis(self, pos1:tuple, pos2:tuple):
+    def man_dis(self, pos1, pos2):
         return np.abs(pos1[0] - pos2[0]) + np.abs(pos1[1] - pos2[1]) 
 
     def reset(self):
+        self.legal_start_end = [[x, y] for x in range(self.grid_height) for y in range(self.grid_width) if self.grid_data[x][y]==0]
+        start_end = random.sample(self.legal_start_end, self.n_agents*2)
+        idx = 0
+        for agent in self.robot_list:
+            agent.update_start_goal(start_end[idx], start_end[idx+1])
+            idx +=2
+       
         for x, y in self.changed_grid:
             self.grid_data[x][y] = 0
+        self.changed_grid = []
         obs = np.zeros((self.num_agent, 4, self.grid_height, self.grid_width))
         for i in range(self.num_agent):
             obstacle = self.grid_data
@@ -327,7 +338,17 @@ if __name__=='__main__':
     
     warehouse = WareHouse(grid_data, 2)
     warehouse.reset()
-    for i in range (2):
+    for i in range (5):
+        # print(i)
+        actions = [0, np.random.randint(0, 4)]
+        # print(actions)
+        warehouse.step(actions)
+        fig, ax = warehouse.render()
+        plt.draw()
+        plt.pause(0.5)
+
+    warehouse.reset()
+    for i in range (5):
         # print(i)
         actions = [0, np.random.randint(0, 4)]
         # print(actions)
