@@ -40,6 +40,7 @@ class MADQN:
 
     def train_agents(self, n_episodes: int, steps_per_episode: int = 51, log_period: int=100, render: bool=True):
         """ Train """
+        print('training...')
 
         train_rewards = []
         exploited_rewards = []

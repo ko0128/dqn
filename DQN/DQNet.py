@@ -12,7 +12,7 @@ class DQN(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_layers)
         self.fc2 = nn.Linear(hidden_layers, hidden_layers // 2)
         self.fc3 = nn.Linear(hidden_layers // 2, output_dim)
-        self.vgg_model = models.vgg11(pretrained=False)
+        # self.vgg_model = models.vgg11(pretrained=False)
 
         # self.cnn = nn.Sequential(
         #     nn.Conv2d(4, 16, 3),
