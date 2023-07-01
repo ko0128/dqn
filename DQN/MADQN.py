@@ -48,6 +48,7 @@ class MADQN:
         minibatch_test_scores, minibatch_succesful_agents = [], []
 
         start_time = time.time()
+        print(n_episodes)
         for ep in range(n_episodes):
             print(f'epsiode = {ep}', end=' ')
 
