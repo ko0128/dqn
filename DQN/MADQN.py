@@ -82,7 +82,7 @@ class MADQN:
                 # add agent rewards of transition
                 current_ep_rewards += sum(rewards)
 
-                rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
+                # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
                 if render and not ep % log_period:
                     # self.env.render()

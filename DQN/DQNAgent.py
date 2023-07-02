@@ -1,5 +1,8 @@
 import numpy as np
 import torch
+import torch.optim as optim
+import torch.nn as nn
+
 
 from DQN.DQNet import DQN
 from DQN.ReplayBuffer import *
@@ -27,6 +30,11 @@ class DQNAgent:
         self.policy_net = DQN(obs_dim, act_dim, self.hidden_layer_dim).to('cuda')
 
         self.t = 0
+
+
+        # my implementation
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=0.002)
+        self.loss_func = nn.MSELoss() 
 
     def _decay_epsilon(self):
         """ Decrease exploration over time by exponentially decaying exploration threshold """
@@ -136,6 +144,12 @@ class DQNAgent:
 
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
+
+        # loss = self.loss_func()
+        # self.optimizer.zero_grad()                                      # 清空上一步的残余更新参数值
+        # loss.backward()                                                 # 误差反向传播, 计算参数更新值
+        # self.optimizer.step()  
+
 
         if not self.soft_update and not self.t % 500:
             self.target_net.load_state_dict(self.policy_net.state_dict())
