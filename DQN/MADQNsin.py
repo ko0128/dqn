@@ -26,8 +26,7 @@ class MADQNsin:
 
         # initialize agents
         self.agents = [DQNAgentsin(self.obs_dim, self.n_actions, **agent_params) for _ in range(env.n_agents)]
-        # for agent in self.agents:
-        #     agent = agent.to('cuda')
+
         self.burnin_steps = agent_params['burnin_steps']
 
 
