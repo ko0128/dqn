@@ -137,7 +137,7 @@ class DQNAgent:
         # print(f'batch_states.shape: {batch_actions.shape}')
         # current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
         current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1)).cpu()
-        print(current_qvals.shape)
+        print(current_qvals)
         
         # compute target q-values
         # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
