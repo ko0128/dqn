@@ -128,9 +128,9 @@ class DQNAgentsin:
 
         batch_states = torch.stack(batch.state).to('cuda')
         batch_actions = torch.cat(batch.action).to('cuda')
-        batch_rewards = torch.cat(batch.reward)
+        batch_rewards = torch.cat(batch.reward).to('cuda')
         batch_next_states = torch.stack(batch.next_state).to('cuda')
-        batch_not_dones = ~torch.cat(batch.done) # transitions in replay buffer are already done
+        batch_not_dones = ~torch.cat(batch.done).to('cuda') # transitions in replay buffer are already done
 
         # gather current q-values by action
         # print(f'batch_states.shape: {batch_states.shape}')
