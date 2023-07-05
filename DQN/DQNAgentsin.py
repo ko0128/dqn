@@ -142,12 +142,15 @@ class DQNAgentsin:
         
         # compute target q-values
         # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
-        target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
+        target_qvals = self.target_net.forward(batch_next_states).max(1)[0].values.detach()
         print(target_qvals.shape)
         print(target_qvals)
 
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
+
+        print(target.shape)
+        print(target)
 
         loss = self.loss_func(target, current_qvals)
         self.optimizer.zero_grad()                                      # 清空上一步的残余更新参数值
