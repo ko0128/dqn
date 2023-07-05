@@ -5,6 +5,7 @@ import torch
 import random
 
 from DQN.MADQN import MADQN
+from DQN.MADQNsin import MADQNsin
 from DQN.warehouse import WareHouse
 
 MODEL = 'DQN'
@@ -44,6 +45,8 @@ if __name__ == '__main__':
     # choose model
     if MODEL == 'DQN':
         MA_model = MADQN(env)
+    else:
+        MA_model = MADQNsin(env)
 
     successful_run = False
 
