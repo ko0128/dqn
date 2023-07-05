@@ -44,8 +44,7 @@ if __name__ == '__main__':
 
     # choose model
     if MODEL == 'DQN':
-        MA_model = MADQN(env)
-    else:
+        # MA_model = MADQN(env)
         MA_model = MADQNsin(env)
 
     successful_run = False

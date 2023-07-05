@@ -141,7 +141,7 @@ class DQNAgentsin:
         
         # compute target q-values
         # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
-        target_qvals = self.target_net.forward(batch_next_states).max(1)[0].values.detach()
+        target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
         print(target_qvals.shape)
         print(target_qvals)
 
