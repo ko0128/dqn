@@ -31,11 +31,11 @@ class MADQN:
         self.burnin_steps = agent_params['burnin_steps']
 
         # value decomposition network
-        # self.vd_net = VDNet(input_dim=self.batch_size, output_dim=self.n_actions)
-        # policy_net_params = []
-        # for agent in self.agents:
-        #     policy_net_params += agent.policy_net.parameters()
-        # self.vd_optimizer = optim.Adam(params=policy_net_params, lr=vdn_params['lr'])
+        self.vd_net = VDNet(input_dim=self.batch_size, output_dim=self.n_actions)
+        policy_net_params = []
+        for agent in self.agents:
+            policy_net_params += agent.policy_net.parameters()
+        self.vd_optimizer = optim.Adam(params=policy_net_params, lr=vdn_params['lr'])
 
 
     def train_agents(self, n_episodes: int, steps_per_episode: int = 51, log_period: int=100, render: bool=True):
@@ -120,18 +120,18 @@ class MADQN:
                 if not self.agents[0].start_training():
                     continue
 
-                # if vdn_params['loss_func'] == 'Huber':
-                #     loss = F.smooth_l1_loss(qvals_sum, target_sum)
-                # elif vdn_params['loss_func'] == 'MSE':
-                #     loss = F.mse_loss(qvals_sum, target_sum)
+                if vdn_params['loss_func'] == 'Huber':
+                    loss = F.smooth_l1_loss(qvals_sum, target_sum)
+                elif vdn_params['loss_func'] == 'MSE':
+                    loss = F.mse_loss(qvals_sum, target_sum)
 
-                # self.vd_optimizer.zero_grad()
+                self.vd_optimizer.zero_grad()
 
-                # loss.backward()
+                loss.backward()
 
-                # # clip gradients
-                # self.vd_net.clip_gradients(vdn_params['clip_val'])
-                # self.vd_optimizer.step()
+                # clip gradients
+                self.vd_net.clip_gradients(vdn_params['clip_val'])
+                self.vd_optimizer.step()
 
             print(cnt)
 
