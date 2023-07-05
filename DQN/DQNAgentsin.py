@@ -136,7 +136,7 @@ class DQNAgentsin:
         # print(f'batch_states.shape: {batch_states.shape}')
         # print(f'batch_states.shape: {batch_actions.shape}')
         # current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
-        current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1)).cpu()
+        current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
         print(current_qvals.shape)
         print(current_qvals.device.type)
         print(current_qvals)
