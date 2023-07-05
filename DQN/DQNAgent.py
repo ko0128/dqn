@@ -137,7 +137,7 @@ class DQNAgent:
         # print(f'batch_states.shape: {batch_actions.shape}')
         # current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
         current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1)).cpu()
-        print(current_qvals)
+        # print(current_qvals)
         
         # compute target q-values
         # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
@@ -146,10 +146,10 @@ class DQNAgent:
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
 
-        loss = self.loss_func(target, target_qvals)
-        self.optimizer.zero_grad()                                      # 清空上一步的残余更新参数值
-        loss.backward()                                                 # 误差反向传播, 计算参数更新值
-        self.optimizer.step()  
+        # loss = self.loss_func(target, target_qvals)
+        # self.optimizer.zero_grad()                                      # 清空上一步的残余更新参数值
+        # loss.backward()                                                 # 误差反向传播, 计算参数更新值
+        # self.optimizer.step()  
 
 
         if not self.soft_update and not self.t % 500:
