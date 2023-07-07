@@ -210,7 +210,8 @@ class MADQN:
                 # target_reached += rewards.count(5.0)
 
                 if render:
-                    self.env.render()
+                    # self.env.render()
+                    pass
 
                 cum_rewards += sum(rewards)
                 ep_step += 1
