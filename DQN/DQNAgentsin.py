@@ -175,7 +175,7 @@ class DQNAgentsin:
         print(type(target))
         print(target)
 
-        return current_qvals.cpu(), target.unsqueeze(1).cpu()
+        return current_qvals.cpu(), target.cpu()
 
 
     def do_soft_update(self):
