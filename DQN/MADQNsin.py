@@ -192,8 +192,9 @@ class MADQNsin:
                     # print(f'full_obs shape:{full_obs.shape}')
                     actions.append(agent.get_action(full_obs, explore=False))
 
-                obs, rewards, dones, info = self.env.step(actions)
 
+                obs, rewards, dones, info = self.env.step(actions)
+                print(f'dones: {dones}, rewards: {rewards}')
                 # target_reached += rewards.count(5.0)
 
                 if render:
