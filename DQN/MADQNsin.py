@@ -197,8 +197,8 @@ class MADQNsin:
                 print(f'dones: {dones}, rewards: {rewards}')
                 # target_reached += rewards.count(5.0)
 
-                if render:
-                    self.env.render()
+                # if render:
+                #     self.env.render()
 
                 cum_rewards += sum(rewards)
                 ep_step += 1
