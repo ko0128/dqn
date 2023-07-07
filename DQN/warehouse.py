@@ -79,9 +79,9 @@ class WareHouse:
         # self.robots.append(Robot((0,0), (9,9)))
         self.num_agent = num_agent
         self.n_agents = num_agent
-        self.actions = [(1, 0), (-1, 0), (0, 1), (0, -1), (0, 0)]
-        self.n_actions = len(self.actions)
-        self.observation_space = len(self.actions)*10*10
+        self.action_dir = [(1, 0), (-1, 0), (0, 1), (0, -1), (0, 0)]
+        self.n_actions = len(self.action_dir)
+        self.observation_space = len(self.action_dir)*10*10
         # self.robot = Robot([0, 0], [9, 9])
         self.robot_list = []
         self.robot_list.append(Robot([0, 0], [0, 5]))
@@ -189,7 +189,7 @@ class WareHouse:
         for idx, robot in enumerate(self.robot_list):
             reward = 0
             is_legal_move = True
-            action_set = [(1, 0), (-1, 0), (0, 1), (0, -1), (0, 0)]
+            action_set = self.action_dir
             new_pos = (robot.pos[0]+action_set[actions[idx]][0], robot.pos[1]+action_set[actions[idx]][1])
             if new_pos[0] < 0 or new_pos[0] > self.grid_height-1 or new_pos[1] < 0 or new_pos[1] > self.grid_width-1:
                 reward -= -2
@@ -216,7 +216,7 @@ class WareHouse:
         # print(is_legal_move_list)
         for robot, is_legal_move, action in zip(self.robot_list, is_legal_move_list, act_list):
             if is_legal_move:
-                act_set  = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+                act_set  = self.action_dir
                 robot.pos[0] = robot.pos[0]+act_set[action][0]
                 robot.pos[1] = robot.pos[1]+act_set[action][1]
 
