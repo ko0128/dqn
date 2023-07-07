@@ -42,7 +42,7 @@ class MADQNsin:
 
         start_time = time.time()
         print(n_episodes)
-        for ep in range(n_episodes):
+        for ep in range(1, n_episodes+1):
             print(f'epsiode = {ep}')
 
             # initialize new episode
@@ -76,7 +76,7 @@ class MADQNsin:
                 current_ep_rewards += sum(rewards)
                 if all(dones):
                     current_ep_rewards += 20
-                print(f'dones: {dones}, rewards: {rewards}') 
+                # print(f'dones: {dones}, rewards: {rewards}') 
 
                 # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
@@ -130,7 +130,7 @@ class MADQNsin:
                 return exploited_rewards, successful_agents, 0
             print(129)
             # log test score and successfull agents very 25 episodes
-            if not ep+1 % 10:
+            if not ep % 10:
                 score, suc_agents = self.test_agents(1, False, False)
                 minibatch_test_scores.append(score)
                 minibatch_succesful_agents.append(suc_agents)
