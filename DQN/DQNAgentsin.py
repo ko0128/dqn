@@ -167,6 +167,11 @@ class DQNAgentsin:
         elif self.soft_update:
             self.do_soft_update()
 
+        print(type(current_qvals))
+        print((current_qvals))
+        print(type(target))
+        print(target)
+
         return current_qvals, target.unsqueeze(1)
 
 
