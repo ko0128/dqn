@@ -191,22 +191,27 @@ class WareHouse:
             is_legal_move = True
             action_set = self.action_dir
             new_pos = (robot.pos[0]+action_set[actions[idx]][0], robot.pos[1]+action_set[actions[idx]][1])
+            if actions[idx] != 4 :
+                reward -= 0.3
+            else:
+                if new_pos[0] != robot.goal[0] or new_pos[1] != robot.goal[1]:
+                    reward -= 0.5
             if new_pos[0] < 0 or new_pos[0] > self.grid_height-1 or new_pos[1] < 0 or new_pos[1] > self.grid_width-1:
-                reward -= -2
+                reward -= -1
                 is_legal_move = False
             else:
                 if self.grid_data[new_pos[0]][new_pos[1]] == 1:
-                    reward -= 2
+                    reward -= 1
                     is_legal_move = False
                 
                 if self.man_dis(new_pos, robot.goal) < self.man_dis(robot.pos, robot.goal):
-                    reward += 2
+                    reward += 0.3
                 else:
-                    reward -= 2
+                    reward -= 0.5
 
-                if new_pos[0] == robot.goal[0] and new_pos[1] == robot.goal[1]:
-                    reward = 100
-                    is_legal_move = True
+                # if new_pos[0] == robot.goal[0] and new_pos[1] == robot.goal[1]:
+                #     reward = 100
+                #     is_legal_move = True
 
             reward_list.append(reward)
             is_legal_move_list.append(is_legal_move) 

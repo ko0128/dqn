@@ -74,6 +74,8 @@ class MADQNsin:
 
                 # add agent rewards of transition
                 current_ep_rewards += sum(rewards)
+                if all(dones):
+                    current_ep_rewards += 20
                 print(f'dones: {dones}, rewards: {rewards}') 
 
                 # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
@@ -115,7 +117,7 @@ class MADQNsin:
                 # stop here during burn-in period
                 if not self.agents[0].start_training():
                     continue
-
+            
             print(cnt)
             print(f'current_ep_rewards: {current_ep_rewards}')
 
