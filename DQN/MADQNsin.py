@@ -148,8 +148,8 @@ class MADQNsin:
                 print(f'Mean last 5 number of agents successfull: {successful_agents[-1]:.2f}')
             print(147)
 
-            if np.mean(successful_agents[-10:]) == self.env.n_agents:
-                break
+            # if np.mean(successful_agents[-10:]) == self.env.n_agents:
+            #     break
             print(151)
 
         # self.env.close()
@@ -187,13 +187,14 @@ class MADQNsin:
                 actions = []
                 for i, agent in enumerate(self.agents):
                     # augment observation with steps in environment
-                    full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
+                    # full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
+                    full_obs = np.array(obs[i], dtype=np.float32)
                     # print(f'full_obs shape:{full_obs.shape}')
                     actions.append(agent.get_action(full_obs, explore=False))
 
                 obs, rewards, dones, info = self.env.step(actions)
 
-                target_reached += rewards.count(5.0)
+                # target_reached += rewards.count(5.0)
 
                 if render:
                     self.env.render()
@@ -202,7 +203,7 @@ class MADQNsin:
                 ep_step += 1
 
             game_rewards.append(cum_rewards)
-            successful_agents.append(target_reached)
+            # successful_agents.append(target_reached)
             # time.sleep(0.2)
 
         if done_training:
