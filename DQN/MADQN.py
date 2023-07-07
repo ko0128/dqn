@@ -144,7 +144,7 @@ class MADQN:
                 return exploited_rewards, successful_agents, 0
 
             # log test score and successfull agents very 25 episodes
-            if not ep % 10:
+            if not ep % 25:
                 score, suc_agents = self.test_agents(1, False, False)
                 minibatch_test_scores.append(score)
                 minibatch_succesful_agents.append(suc_agents)
