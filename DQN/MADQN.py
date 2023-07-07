@@ -81,7 +81,8 @@ class MADQN:
 
                 # add agent rewards of transition
                 current_ep_rewards += sum(rewards)
-
+                if all(dones):
+                    current_ep_rewards += 20
                 # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
                 if render and not ep % log_period:
@@ -133,8 +134,9 @@ class MADQN:
                 self.vd_net.clip_gradients(vdn_params['clip_val'])
                 self.vd_optimizer.step()
 
+            
             print(cnt)
-
+            print(f'Reward: {current_ep_rewards}')
             train_rewards.append(current_ep_rewards)
 
             # if ep == 350 and max(exploited_rewards) < 0:
@@ -200,7 +202,7 @@ class MADQN:
                     # full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
                     full_obs = np.array(obs[i], dtype=np.float32)
                     # print(f'full_obs shape:{full_obs.shape}')
-                    actions.append(agent.get_action(full_obs, explore=False))
+                    actions.append(agent.get_action(full_obs, explore=True))
 
                 obs, rewards, dones, info = self.env.step(actions)
 

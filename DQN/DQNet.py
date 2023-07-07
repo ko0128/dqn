@@ -34,6 +34,9 @@ class DQN(nn.Module):
             nn.ReLU(),
             nn.Linear(128, 5),
         )
+
+        # self.rnn = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+
         self.pos_layer = nn.Sequential(
             nn.Linear(2, 6),
             nn.ReLU(),
