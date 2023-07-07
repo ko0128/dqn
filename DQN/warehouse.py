@@ -197,7 +197,7 @@ class WareHouse:
                 if new_pos[0] != robot.goal[0] or new_pos[1] != robot.goal[1]:
                     reward -= 0.5
             if new_pos[0] < 0 or new_pos[0] > self.grid_height-1 or new_pos[1] < 0 or new_pos[1] > self.grid_width-1:
-                reward -= -1
+                reward -= 1
                 is_legal_move = False
             else:
                 if self.grid_data[new_pos[0]][new_pos[1]] == 1:
