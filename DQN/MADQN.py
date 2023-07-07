@@ -215,7 +215,10 @@ class MADQN:
 
                 cum_rewards += sum(rewards)
                 ep_step += 1
-            print(ep_step)
+                if ep_step > 100000:
+                    print('Test Fail QQ')
+                    break
+            print(f'ep_step: {ep_step}, reward: {cum_rewards}')
             game_rewards.append(cum_rewards)
             successful_agents.append(target_reached)
             # time.sleep(0.2)
