@@ -147,6 +147,7 @@ class DQNAgent:
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
 
         if not self.soft_update and not self.t % 500:
+            print(f'Update target network at step {self.t}')
             self.target_net.load_state_dict(self.policy_net.state_dict())
         elif self.soft_update:
             self.do_soft_update()

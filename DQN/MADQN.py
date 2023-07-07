@@ -181,6 +181,7 @@ class MADQN:
 
         game_rewards = []
         successful_agents = []
+        print('testing...')
 
         for game in range(n_games):
 
@@ -206,14 +207,14 @@ class MADQN:
 
                 obs, rewards, dones, info = self.env.step(actions)
 
-                target_reached += rewards.count(5.0)
+                # target_reached += rewards.count(5.0)
 
                 if render:
                     self.env.render()
 
                 cum_rewards += sum(rewards)
                 ep_step += 1
-
+            print(ep_step)
             game_rewards.append(cum_rewards)
             successful_agents.append(target_reached)
             # time.sleep(0.2)
