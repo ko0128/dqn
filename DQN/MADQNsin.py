@@ -103,6 +103,8 @@ class MADQNsin:
                     if not self.agents[0].start_training():
                         continue
 
+                    print(qvals_sum.shape)
+                    print(qvals.shape)
                     qvals_sum += qvals
                     target_sum += target
 
@@ -114,6 +116,7 @@ class MADQNsin:
                     continue
 
             print(cnt)
+            print(f'current_ep_rewards: {current_ep_rewards}')
 
             train_rewards.append(current_ep_rewards)
 
