@@ -103,8 +103,8 @@ class MADQNsin:
                     if not self.agents[0].start_training():
                         continue
 
-                    print(qvals_sum.shape)
-                    print(qvals.shape)
+                    print(target_sum.shape)
+                    print(target.shape)
                     qvals_sum += qvals
                     target_sum += target
 
