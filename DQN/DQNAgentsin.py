@@ -152,7 +152,7 @@ class DQNAgentsin:
 
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
-        target = target.view(target.size, 1)
+        target = target.view(target.size[0], 1)
         print('target')
         print(target.shape)
         print(target.device.type)
