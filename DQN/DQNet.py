@@ -39,12 +39,14 @@ class DQN(nn.Module):
             nn.ReLU(),
         )
 
-    def forward(self, x):
+    def forward(self, x, pos=[0,0]):
         # x = x.view(x.size()[0], -1)
         # x = F.relu(self.fc1(x))
         # x = F.relu(self.fc2(x))
         # return self.fc3(x)
-        # pos = 
+        # pos = torch.zeros((x.shape[0],0))
+        # for i in len(pos):
+        #     pos[i] = 
         x = self.cnn(x)
         x = self.cnn2(x)
         x = x.view(x.shape[0], -1)

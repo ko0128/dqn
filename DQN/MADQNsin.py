@@ -76,7 +76,7 @@ class MADQNsin:
                 current_ep_rewards += sum(rewards)
                 if all(dones):
                     current_ep_rewards += 20
-                # print(f'dones: {dones}, rewards: {rewards}') 
+                print(f'dones: {dones}, rewards: {rewards}') 
 
                 # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
