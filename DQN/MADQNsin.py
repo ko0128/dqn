@@ -74,6 +74,7 @@ class MADQNsin:
 
                 # add agent rewards of transition
                 current_ep_rewards += sum(rewards)
+                print(f'dones: {dones}, rewards: {rewards}') 
 
                 # rewards = [r if not d else 5.0 for r, d in zip(rewards, dones)]
 
@@ -103,8 +104,8 @@ class MADQNsin:
                     if not self.agents[0].start_training():
                         continue
 
-                    print(target_sum.shape)
-                    print(target.shape)
+                    # print(target_sum.shape)
+                    # print(target.shape)
                     qvals_sum += qvals
                     target_sum += target
 

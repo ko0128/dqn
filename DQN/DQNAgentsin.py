@@ -137,26 +137,26 @@ class DQNAgentsin:
         # print(f'batch_states.shape: {batch_actions.shape}')
         # current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
         current_qvals = self.policy_net.forward(batch_states).gather(dim=1, index=batch_actions.unsqueeze(1))
-        print('current_qvals')
-        print(current_qvals.shape)
-        print(current_qvals.device.type)
-        print(current_qvals)
+        # print('current_qvals')
+        # print(current_qvals.shape)
+        # print(current_qvals.device.type)
+        # print(current_qvals)
         
         # compute target q-values
         # target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
         target_qvals = self.target_net.forward(batch_next_states).max(1).values.detach()
-        print('target_qvals')
-        print(target_qvals.shape)
-        print(target_qvals.device.type)
-        print(target_qvals)
+        # print('target_qvals')
+        # print(target_qvals.shape)
+        # print(target_qvals.device.type)
+        # print(target_qvals)
 
         # compute target function = reward + discounted target Q(s',a')
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
         target = target.view(target.shape[0], 1)
-        print('target')
-        print(target.shape)
-        print(target.device.type)
-        print(target)
+        # print('target')
+        # print(target.shape)
+        # print(target.device.type)
+        # print(target)
 
 
         loss = self.loss_func(target, current_qvals)
@@ -170,10 +170,10 @@ class DQNAgentsin:
         elif self.soft_update:
             self.do_soft_update()
 
-        print(type(current_qvals))
-        print((current_qvals))
-        print(type(target))
-        print(target)
+        # print(type(current_qvals))
+        # print((current_qvals))
+        # print(type(target))
+        # print(target)
 
         return current_qvals.cpu(), target.cpu()
 

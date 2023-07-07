@@ -32,7 +32,7 @@ class DQN(nn.Module):
             nn.ReLU(),
             nn.Linear(128, 128),
             nn.ReLU(),
-            nn.Linear(128, 4),
+            nn.Linear(128, 5),
         )
         self.pos_layer = nn.Sequential(
             nn.Linear(2, 6),
