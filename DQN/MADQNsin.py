@@ -190,7 +190,7 @@ class MADQNsin:
                     # full_obs = np.array(obs[i] + [ep_step / self.steps_per_episode], dtype=np.float32)
                     full_obs = np.array(obs[i], dtype=np.float32)
                     # print(f'full_obs shape:{full_obs.shape}')
-                    actions.append(agent.get_action(full_obs, explore=False))
+                    actions.append(agent.get_action(full_obs, explore=True))
 
 
                 obs, rewards, dones, info = self.env.step(actions)
