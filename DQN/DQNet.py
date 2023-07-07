@@ -34,12 +34,17 @@ class DQN(nn.Module):
             nn.ReLU(),
             nn.Linear(128, 4),
         )
+        self.pos_layer = nn.Sequential(
+            nn.Linear(2, 6),
+            nn.ReLU(),
+        )
 
     def forward(self, x):
         # x = x.view(x.size()[0], -1)
         # x = F.relu(self.fc1(x))
         # x = F.relu(self.fc2(x))
         # return self.fc3(x)
+        # pos = 
         x = self.cnn(x)
         x = self.cnn2(x)
         x = x.view(x.shape[0], -1)

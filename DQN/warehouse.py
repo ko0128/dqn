@@ -177,6 +177,7 @@ class WareHouse:
                     neighbor_goal[agt.goal[0]][agt.goal[1]] = 1
             agt_goal = np.zeros(self.grid_data.shape)
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
+            agt_goal[self.robot_list[i].pos[0]][self.robot_list[i].pos[1]] = 1
             obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=0)   
         return obs
     
