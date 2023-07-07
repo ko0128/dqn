@@ -124,27 +124,31 @@ class MADQNsin:
             # if ep == 350 and max(exploited_rewards) < 0:
             if ep == 350 and max(train_rewards) < 0:
                 print("NO POSITIVE REWARDS AFTER 300 EPISODES")
-                self.env.close()
+                # self.env.close()
                 return exploited_rewards, successful_agents, 0
-
+            print(129)
             # log test score and successfull agents very 25 episodes
             if not ep % 10:
                 score, suc_agents = self.test_agents(1, False, False)
                 minibatch_test_scores.append(score)
                 minibatch_succesful_agents.append(suc_agents)
+            print(135)
 
             if not ep % 50:
                 exploited_rewards.append(np.mean(minibatch_test_scores))
                 successful_agents.append(np.mean(minibatch_succesful_agents))
                 minibatch_test_scores, minibatch_succesful_agents = [], []
+            print(141)
 
             if not ep % log_period:
                 print(f'\nEpisode {ep}, {time.time()-start_time:.0f} sec. ({(time.time()-start_time)/60:.1f} min.)')
                 print(f'Mean last 5 test rewards: {exploited_rewards[-1]:.2f}')
                 print(f'Mean last 5 number of agents successfull: {successful_agents[-1]:.2f}')
+            print(147)
 
             if np.mean(successful_agents[-10:]) == self.env.n_agents:
                 break
+            print(151)
 
         # self.env.close()
 
