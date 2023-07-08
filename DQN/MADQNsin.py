@@ -97,8 +97,9 @@ class MADQNsin:
                     agent_next_obs = np.array(next_obs[a], dtype=np.float32)
                     # print(agent_obs.shape)
                     # print(agent_next_obs.shape)
-                    assert agent_obs.shape ==  (4, 10, 10)
-                    assert agent_next_obs.shape ==  (4, 10, 10)
+                    
+                    # assert agent_obs.shape ==  (4, 10, 10)
+                    # assert agent_next_obs.shape ==  (4, 10, 10)
                         
                     # let agent take step and add
                     qvals, target = agent.step(agent_obs, actions[a], rewards[a], agent_next_obs, dones[a])

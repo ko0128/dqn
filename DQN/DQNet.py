@@ -28,7 +28,7 @@ class DQN(nn.Module):
             nn.MaxPool2d(2)
         )
         self.fc_layer = nn.Sequential(
-            nn.Linear(128, 128),
+            nn.Linear(130, 128),
             nn.ReLU(),
             nn.Linear(128, 128),            
         )
@@ -46,22 +46,25 @@ class DQN(nn.Module):
 
 
 
-        # self.pos_layer = nn.Sequential(
-        #     nn.Linear(2, 6),
-        #     nn.ReLU(),
-        # )
+        self.pos_layer = nn.Sequential(
+            nn.Linear(2, 6),
+            nn.ReLU(),
+        )
 
-    def forward(self, x, pos=[0,0]):
+    def forward(self, input):
         # x = x.view(x.size()[0], -1)
         # x = F.relu(self.fc1(x))
         # x = F.relu(self.fc2(x))
         # return self.fc3(x)
         # pos = torch.zeros((x.shape[0],0))
         # for i in len(pos):
-        #     pos[i] = 
+        #     pos[i] =
+        x = input[:,:4,:,:]
+        pos = input[:,4,0,:2]
         x = self.cnn(x)
         x = self.cnn2(x)
         x = x.view(x.shape[0], -1)
+        x = torch.cat((x, pos),dim=1)
         y = self.fc_layer(x)
         res = x + y
         res = res.unsqueeze(-1)

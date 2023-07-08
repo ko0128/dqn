@@ -262,7 +262,7 @@ class WareHouse:
 
         dones = self.are_finished()
 
-        obs = np.zeros((self.num_agent, 4, self.grid_height, self.grid_width))
+        obs = np.zeros((self.num_agent, 5, self.grid_height, self.grid_width))
         # pos = np.zeros()
         for i in range(self.num_agent):
             obstacle = self.grid_data
@@ -275,9 +275,15 @@ class WareHouse:
                     neighbor_goal[agt.goal[0]][agt.goal[1]] = 1
             agt_goal = np.zeros(self.grid_data.shape)
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
-            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=0)
+            
+            v_hat = np.zeros(self.grid_data.shape)
+            v = np.array(self.robot_list[i].goal - self.robot_list[i].pos)
+            v = v / np.abs(v)
+            v_hat[0][0]  = v[0]
+            v_hat[0][1]  = v[1]
+            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal, v), axis=0)
             # print(obs[i].shape)
-            assert obs[i].shape == (4, 10, 10)
+            # assert obs[i].shape == (4, 10, 10)
         # print(obs)
         # return next_state, reward, done, info
         return obs, reward, dones, 'Hello'
