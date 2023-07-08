@@ -194,7 +194,7 @@ class MADQNsin:
 
 
                 obs, rewards, dones, info = self.env.step(actions)
-                print(f'dones: {dones}, rewards: {rewards}')
+                # print(f'dones: {dones}, rewards: {rewards}')
                 # target_reached += rewards.count(5.0)
 
                 # if render:
@@ -202,7 +202,10 @@ class MADQNsin:
 
                 cum_rewards += sum(rewards)
                 ep_step += 1
-
+                if ep_step > 100000:
+                    print('Test Fail QQ')
+                    break
+            print(f'ep_step: {ep_step}, reward: {cum_rewards}')
             game_rewards.append(cum_rewards)
             # successful_agents.append(target_reached)
             # time.sleep(0.2)
