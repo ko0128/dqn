@@ -65,7 +65,7 @@ class DQN(nn.Module):
         x = self.cnn2(x)
         x = x.view(x.shape[0], -1)
         x = torch.cat((x, pos),dim=1)
-        y = self.fc_layer(x)
+        y = self.fc_layer(x) 
         res = x + y
         res = res.unsqueeze(-1)
         res, _ = self.rnn(res) 
