@@ -117,7 +117,7 @@ class MADQNsin:
                 # stop here during burn-in period
                 if not self.agents[0].start_training():
                     continue
-                if cnt > 500:
+                if cnt > 1000:
                     break
             
             print(cnt)
