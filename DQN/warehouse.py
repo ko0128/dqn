@@ -281,7 +281,7 @@ class WareHouse:
             v = v / np.abs(v)
             v_hat[0][0]  = v[0]
             v_hat[0][1]  = v[1]
-            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal, v), axis=0)
+            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal, v_hat), axis=0)
             # print(obs[i].shape)
             # assert obs[i].shape == (4, 10, 10)
         # print(obs)
