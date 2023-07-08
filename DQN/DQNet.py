@@ -27,6 +27,15 @@ class DQN(nn.Module):
             nn.Conv2d(32, 32,3, padding = 1),
             nn.MaxPool2d(2)
         )
+        self.fc_layer = nn.Sequential(
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),            
+        )
+        self.rnn = nn.LSTM(1, 1, 2, batch_first=True)
+
+        
+
         self.pred = nn.Sequential(
             nn.Linear(128, 128),
             nn.ReLU(),
@@ -35,12 +44,12 @@ class DQN(nn.Module):
             nn.Linear(128, 5),
         )
 
-        # self.rnn = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
 
-        self.pos_layer = nn.Sequential(
-            nn.Linear(2, 6),
-            nn.ReLU(),
-        )
+
+        # self.pos_layer = nn.Sequential(
+        #     nn.Linear(2, 6),
+        #     nn.ReLU(),
+        # )
 
     def forward(self, x, pos=[0,0]):
         # x = x.view(x.size()[0], -1)
@@ -53,5 +62,10 @@ class DQN(nn.Module):
         x = self.cnn(x)
         x = self.cnn2(x)
         x = x.view(x.shape[0], -1)
+        y = self.fc_layer(x)
+        res = x + y
+        res = res.unsqueeze(-1)
+        res, _ = self.rnn(res) 
+        res = res.squeeze(-1)
         x = self.pred(x)
         return x

@@ -9,7 +9,8 @@ from DQN.MADQNsin import MADQNsin
 from DQN.warehouse import WareHouse
 
 MODEL = 'DQN'
-ENV_NAME = 'ma_gym:Switch4-v0'
+# ENV_NAME = 'ma_gym:Switch4-v0'
+ENV_NAME = 'Warehouse'
 N_EPISODES = 3_000
 LOG_PERIOD = 200
 RENDER = True
@@ -58,7 +59,7 @@ if __name__ == '__main__':
             test_scores, successful_test_agents = MA_model.test_agents(n_games=TEST_EPISODES, render=RENDER)
 
             plt.plot(np.arange(len(train_rewards))*50, train_rewards)
-            plt.title(ENV_NAME[-10:-3] + ": Cumulative rewards")
+            plt.title(ENV_NAME + ": Cumulative rewards")
             plt.xlabel('Epoch')
             plt.ylabel('Rewards')
             plt.show()
