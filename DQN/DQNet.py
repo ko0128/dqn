@@ -28,20 +28,20 @@ class DQN(nn.Module):
             nn.MaxPool2d(2)
         )
         self.fc_layer = nn.Sequential(
-            nn.Linear(130, 128),
+            nn.Linear(130, 130),
             nn.ReLU(),
-            nn.Linear(128, 128),            
+            nn.Linear(130, 130),            
         )
         self.rnn = nn.LSTM(1, 1, 2, batch_first=True)
 
         
 
         self.pred = nn.Sequential(
-            nn.Linear(128, 128),
+            nn.Linear(130, 130),
             nn.ReLU(),
-            nn.Linear(128, 128),
+            nn.Linear(130, 130),
             nn.ReLU(),
-            nn.Linear(128, 5),
+            nn.Linear(130, 5),
         )
 
 
