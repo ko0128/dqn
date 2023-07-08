@@ -179,7 +179,17 @@ class WareHouse:
             agt_goal = np.zeros(self.grid_data.shape)
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
             agt_goal[self.robot_list[i].pos[0]][self.robot_list[i].pos[1]] = 1
-            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal), axis=0)   
+
+            v_hat = np.zeros(self.grid_data.shape)
+            v = np.array(self.robot_list[i].goal) - np.array(self.robot_list[i].pos)
+            length = np.sqrt(v[0]**2+v[1]**2)
+            if length != 0:    
+                v = v / length
+            # print(v)
+            v_hat[0][0]  = v[0]
+            v_hat[0][1]  = v[1]
+
+            obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal, v_hat), axis=0)   
         return obs
     
     def get_reward(self, actions):
