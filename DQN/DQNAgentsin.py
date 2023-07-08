@@ -165,7 +165,7 @@ class DQNAgentsin:
         self.optimizer.step()  
 
 
-        if not self.soft_update and not self.t % 5000:
+        if not self.soft_update and not self.t % 1000:
             # print(f'Update target... at self.t = {self.t}')
             self.target_net.load_state_dict(self.policy_net.state_dict())
         elif self.soft_update:
@@ -213,7 +213,7 @@ class DQNAgentsin:
 
         self.batch_size = 64
         self.loss_func = 'Huber'
-        self.lr = 0.005
+        self.lr = 0.0005
 
         self.burnin_steps = 1_500
 
