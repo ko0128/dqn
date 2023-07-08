@@ -166,7 +166,7 @@ class WareHouse:
         for x, y in self.changed_grid:
             self.grid_data[x][y] = 0
         self.changed_grid = []
-        obs = np.zeros((self.num_agent, 4, self.grid_height, self.grid_width))
+        obs = np.zeros((self.num_agent, 5, self.grid_height, self.grid_width))
         for i in range(self.num_agent):
             obstacle = self.grid_data
             agt_pos = np.zeros(self.grid_data.shape)
