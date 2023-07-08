@@ -1,7 +1,7 @@
 agent_params = {
     'hidden_layer_dim':32,
     'batch_size': 64,
-    'replay_buffer_capacity': 10_000,
+    'replay_buffer_capacity': 20_000,
     'gamma': 0.9,
     'epsilon_start': 0.99,
     'epsilon_end': 0.05,

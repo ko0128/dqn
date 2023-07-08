@@ -119,7 +119,7 @@ class MADQNsin:
                     continue
             
             print(cnt)
-            print(f'current_ep_rewards: {current_ep_rewards}')
+            print(f'current_ep_rewards: {current_ep_rewards:.2f}')
 
             train_rewards.append(current_ep_rewards)
 

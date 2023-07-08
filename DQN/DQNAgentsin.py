@@ -165,7 +165,7 @@ class DQNAgentsin:
         self.optimizer.step()  
 
 
-        if not self.soft_update and not self.t % 500:
+        if not self.soft_update and not self.t % 5000:
             # print(f'Update target... at self.t = {self.t}')
             self.target_net.load_state_dict(self.policy_net.state_dict())
         elif self.soft_update:
