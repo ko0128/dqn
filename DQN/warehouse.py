@@ -278,12 +278,15 @@ class WareHouse:
             
             v_hat = np.zeros(self.grid_data.shape)
             v = np.array(self.robot_list[i].goal) - np.array(self.robot_list[i].pos)
-            v = v / np.abs(v)
+            length = np.sqrt(v[0]**2+v[1]**2)
+            if length != 0:    
+                v = v / length
+            # print(v)
             v_hat[0][0]  = v[0]
             v_hat[0][1]  = v[1]
             obs[i] = np.stack((obstacle, agt_pos, neighbor_goal, agt_goal, v_hat), axis=0)
             # print(obs[i].shape)
-            # assert obs[i].shape == (4, 10, 10)
+            assert obs[i].shape == (5, 10, 10)
         # print(obs)
         # return next_state, reward, done, info
         return obs, reward, dones, 'Hello'
