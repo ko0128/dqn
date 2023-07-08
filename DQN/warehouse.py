@@ -277,7 +277,7 @@ class WareHouse:
             agt_goal[self.robot_list[i].goal[0]][self.robot_list[i].goal[1]] = 1
             
             v_hat = np.zeros(self.grid_data.shape)
-            v = np.array(self.robot_list[i].goal - self.robot_list[i].pos)
+            v = np.array(self.robot_list[i].goal) - np.array(self.robot_list[i].pos)
             v = v / np.abs(v)
             v_hat[0][0]  = v[0]
             v_hat[0][1]  = v[1]
