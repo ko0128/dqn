@@ -153,6 +153,7 @@ class DQNAgent:
             torch.save(self.policy_net.state_dict(), 'policy_net.pth')
         elif self.soft_update:
             print(f'Soft update at self.t = {self.t}')
+            print(not self.soft_update, not self.t%500)
             self.do_soft_update()
 
         return current_qvals, target.unsqueeze(1)
