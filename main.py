@@ -62,10 +62,10 @@ if __name__ == '__main__':
             plt.title(ENV_NAME + ": Cumulative rewards")
             plt.xlabel('Epoch')
             plt.ylabel('Rewards')
-            plt.show()
+            plt.savefig('reward.png')
 
             plt.plot(np.arange(len(successful_train_agents))*50, successful_train_agents)
             plt.title(ENV_NAME[-10:-3] + ": Number of agents reaching their goal")
             plt.xlabel('Epoch')
             plt.ylabel('# succesful agents')
-            plt.show()
+            plt.savefig('success.png')
