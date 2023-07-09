@@ -11,7 +11,7 @@ from DQN.warehouse import WareHouse
 MODEL = 'DQN'
 # ENV_NAME = 'ma_gym:Switch4-v0'
 ENV_NAME = 'Warehouse'
-N_EPISODES = 3_000
+N_EPISODES = 1_500
 LOG_PERIOD = 200
 RENDER = True
 TEST_EPISODES = 10
