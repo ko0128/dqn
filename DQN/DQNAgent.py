@@ -35,7 +35,7 @@ class DQNAgent:
         # my implementation
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=0.002)
         self.loss_func = nn.MSELoss() 
-        self.id = np.random.randint()
+        self.id = np.random.randint(0)
 
     def _decay_epsilon(self):
         """ Decrease exploration over time by exponentially decaying exploration threshold """
