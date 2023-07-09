@@ -7,7 +7,7 @@ agent_params = {
     'epsilon_end': 0.05,
     'epsilon_decay_rate': 5_000,
     'burnin_steps': 1_000,
-    'soft_update': False,
+    'soft_update': True,
     'tau': 0.005,
 }
 
