@@ -35,6 +35,7 @@ class DQNAgent:
         # my implementation
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=0.002)
         self.loss_func = nn.MSELoss() 
+        self.id = np.random.randint()
 
     def _decay_epsilon(self):
         """ Decrease exploration over time by exponentially decaying exploration threshold """
@@ -147,10 +148,10 @@ class DQNAgent:
         target = batch_rewards + self.gamma * target_qvals * batch_not_dones
 
         if not self.soft_update and not self.t % 500:
-            print(f'Update target network at step {self.t}')
+            # print(f'Update target network at step {self.t}')
             self.target_net.load_state_dict(self.policy_net.state_dict())
-            print('save parameter')
-            torch.save(self.policy_net.state_dict(), 'policy_net.pth')
+            # print('save parameter')
+            torch.save(self.policy_net.state_dict(), f'policy_net_{self.id}.pth')
         elif self.soft_update:
             print(f'Soft update at self.t = {self.t}')
             self.do_soft_update()
