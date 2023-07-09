@@ -50,7 +50,6 @@ class MADQN:
         start_time = time.time()
         print(n_episodes)
         for ep in range(1, 1+n_episodes):
-            print(f'epsiode = {ep}')
 
             # initialize new episode
             ep_step = 0
@@ -134,9 +133,7 @@ class MADQN:
                 self.vd_net.clip_gradients(vdn_params['clip_val'])
                 self.vd_optimizer.step()
 
-            
-            print(cnt)
-            print(f'Reward: {current_ep_rewards}')
+            print(f'Episode: {ep}, Episode step: {cnt}, Reward: {current_ep_rewards:.2f}')
             train_rewards.append(current_ep_rewards)
 
             # if ep == 350 and max(exploited_rewards) < 0:
@@ -218,7 +215,7 @@ class MADQN:
                 if ep_step > 100000:
                     print('Test Fail QQ')
                     break
-            print(f'ep_step: {ep_step}, reward: {cum_rewards}')
+            print(f'ep_step: {ep_step}, reward: {cum_rewards:2f}')
             game_rewards.append(cum_rewards)
             successful_agents.append(target_reached)
             # time.sleep(0.2)

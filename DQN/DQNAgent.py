@@ -149,6 +149,7 @@ class DQNAgent:
         if not self.soft_update and not self.t % 500:
             print(f'Update target network at step {self.t}')
             self.target_net.load_state_dict(self.policy_net.state_dict())
+            torch.save(self.policy_net.state_dict(), 'policy_net.pth')
         elif self.soft_update:
             self.do_soft_update()
 
