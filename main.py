@@ -47,7 +47,7 @@ if __name__ == '__main__':
     if MODEL == 'DQN':
         MA_model = MADQN(env)
         print(MODEL)
-    elif MODEL == 'DQNsin'
+    elif MODEL == 'DQNsin':
         MA_model = MADQNsin(env)
         print(MODEL)
 
