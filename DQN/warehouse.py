@@ -156,16 +156,17 @@ class WareHouse:
         return np.abs(pos1[0] - pos2[0]) + np.abs(pos1[1] - pos2[1]) 
 
     def reset(self):
+        for x, y in self.changed_grid:
+            self.grid_data[x][y] = 0
+        self.changed_grid = []
         self.legal_start_end = [[x, y] for x in range(self.grid_height) for y in range(self.grid_width) if self.grid_data[x][y]==0]
+        
         start_end = random.sample(self.legal_start_end, self.n_agents*2)
         idx = 0
         for agent in self.robot_list:
             agent.update_start_goal(start_end[idx], start_end[idx+1])
             idx +=2
        
-        for x, y in self.changed_grid:
-            self.grid_data[x][y] = 0
-        self.changed_grid = []
         obs = np.zeros((self.num_agent, 5, self.grid_height, self.grid_width))
         for i in range(self.num_agent):
             obstacle = self.grid_data
